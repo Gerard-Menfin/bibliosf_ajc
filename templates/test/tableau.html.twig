@@ -1,0 +1,61 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Tableau{% endblock %}
+
+{% block body %}
+    <h2>Tableau</h2>
+    <p>La 2<sup>ième</sup> valeur du tableau est : <i>{{ variable[1] }}</i></p>
+
+    <h3>Boucle FOR</h3>
+    {% for i in 0..10 %}
+        {{ i }}
+    {% endfor %}
+    <br>
+    {% for i in 0..variable|length - 1 %}
+        <p>{{ i }} : {{ variable[i] }}</p>
+    {% endfor %}
+
+    {# Pour connaître la taille d'un array, on va utiliser le filtre 'length'.
+       Dans TWIG, les filtres sont des fonctions qui s'utilisent avec une syntaxe 
+       particulière : 
+            expression|filtre
+       Le filtre va s'appliquer sur l'expression qui est avant la |
+    #}
+    <p>La taille du tableau est {{ variable|length }}</p>
+    {# Le filtre length peut aussi servir à connaitre la taille d'un string #}
+    <p>La taille de la chaîne de caractères <i>{{ variable[3] }}</i> est {{ variable[3]|length }}</p>
+
+    <h3>FOREACH</h3>
+    <table class="table table-bordered">
+        {% for valeur in variable %}
+            <tr>
+                <td>{{ valeur }}</td>
+            </tr>
+        {% endfor %}
+    </table>
+
+    {#  L'équivalent de la boucle FOREACH s'utilise avec la syntaxe suivante :
+            {% for valeur in tableau %}  
+        La variable 'valeur' va prendre successivement toutes les valeurs du tableau
+        Si on veut aussi récupérer les indices, la syntaxe change : 
+            {% for indice, valeur in tableau %}
+    #}
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>Indice</th>
+                <th>Valeur</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for indice, valeur in variable %}
+                <tr>
+                    <td>{{ indice }}</td>
+                    <td>{{ valeur }}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

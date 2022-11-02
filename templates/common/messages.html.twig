@@ -1,0 +1,14 @@
+{# Affichage des messages flash. 
+    Pour accéder aux messages, on utilise la variable 'app'qui est une variable globale de Twig, et 
+    qui contient plusieurs informations concernant le projet. 
+    'app' est un objet 
+    app.flashes est un array associatif, chaque valeur étant un array de string, les indices
+    sont les types de messages définis dans $this->addFlash() #}
+
+    {% for type, messages in app.flashes %}
+        {% for msg in messages %}
+            <div class="alert alert-{{ type }}">
+                {{ msg }}
+            </div>
+        {% endfor %}
+    {% endfor %}

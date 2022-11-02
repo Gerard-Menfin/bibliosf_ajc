@@ -1,0 +1,126 @@
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">BiblioSF</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+            
+        {# Le rôle IS_AUTHENTICATED_FULLY signifie qu'un utilisateur est authentifié #}
+            {% if is_granted("IS_AUTHENTICATED_FULLY") %}
+            <li class="nav-item ">
+                <a class="nav-link" href="">
+                    {# app est une variable globale de twig qui contient des informations sur
+                        l'application, la requête http,...
+                        app.user contient un objet User (ici, c'est un objet de la classe Abonne)
+                            avec les informations de l'utilisateur authentifié
+                    #}
+                    {{ app.user.pseudo }}
+                </a>
+            </li>
+
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('app_logout') }}">
+                    <i class="fa fa-sign-out-alt"></i>
+                </a>
+            </li>
+            {% else %}
+            <li class="nav-item ">
+                <a class="nav-link" href="{{ path('app_login') }}">
+                    <i class="fa fa-sign-in-alt"></i>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{{ path('app_register') }}">
+                    <i class="fa fa-user-plus"></i>
+                </a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Tests
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path('app_test') }}">index</a>
+                    <a class="dropdown-item" href="{{ path('app_test_nouvelle') }}">nouvelle route</a>
+                    <div class="dropdown-divider"></div>
+                    <a class="dropdown-item" href="{{ path('salut', {prenom: 'Didier'}) }}">salut</a>
+                    <a class="dropdown-item" href="{{ path('calcul', {a: 45, b: 5}) }}">Calcul de 45 et 5</a>
+                    <a class="dropdown-item" href="{{ path('app_test_tableau') }}">Tableau</a>
+                </div>
+            </li>
+
+            {# La fonction is_granted permet de savoir si l'utilisateur connecté
+                à le rôle passé en paramètre. 
+                Rappel: dans Symfony, les roles sont des strings, tout en majuscule
+                        qui commencent par 'ROLE_' (mais il y a certains rôles particuliers 
+                        qui n'ont pas la même convention)
+
+            #}
+            {% if is_granted("ROLE_ADMIN") %}
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Auteurs
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path("app_admin_auteur_index") }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path("app_admin_auteur_new") }}">Ajouter</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Livres
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path("app_admin_livre_index") }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path("app_admin_livre_new") }}">Ajouter</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Catégories
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path("app_admin_categorie_index") }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path("app_admin_categorie_new") }}">Ajouter</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Abonnés
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path("app_admin_abonne_index") }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path("app_admin_abonne_new") }}">Ajouter</a>
+                </div>
+            </li>
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown"
+                    aria-haspopup="true" aria-expanded="false">
+                    Emprunts
+                </a>
+                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                    <a class="dropdown-item" href="{{ path("app_admin_emprunt_index") }}">Liste</a>
+                    <a class="dropdown-item" href="{{ path("app_admin_emprunt_new") }}">Ajouter</a>
+                </div>
+            </li>
+
+            {% endif %}
+
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
+            <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+        </form>
+    </div>
+</nav>

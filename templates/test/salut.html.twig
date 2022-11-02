@@ -1,0 +1,20 @@
+{% extends "base.html.twig" %}
+
+
+{# <p>Dans un fichier twig qui hérite d'un autre fichier, tout le contenu doit
+    être dans une balise block</p> #}
+
+{% block body %}
+    <p>Salut {{ prenom }}</p>
+{% endblock %}
+
+
+{% block title %}
+    Salut !
+{% endblock %}
+
+{% block supplementaire %}
+    ce bloc ne sera pas affiché car il n'existe pas dans body
+{% endblock %}
+
+{% block titre2 %}Titre 2 de la page salut{% endblock %}

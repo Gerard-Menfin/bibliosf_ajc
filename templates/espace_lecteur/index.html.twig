@@ -1,0 +1,55 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Espace Lecteur{% endblock %}
+
+{% block h1 %}Mon espace abonné{% endblock %}
+
+{% block body %}
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ app.user.id }}</td>
+            </tr>
+            <tr>
+                <th>Pseudo</th>
+                <td>{{ app.user.pseudo }}</td>
+            </tr>
+            <tr>
+                <th>Mot de passe</th>
+                <td>*****</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ app.user.nom }}</td>
+            </tr>
+            <tr>
+                <th>Prénom</th>
+                <td>{{ app.user.prenom }}</td>
+            </tr>
+            <tr>
+                <th>Adresse</th>
+                <td>{{ app.user.adresse }}</td>
+            </tr>
+
+            <tr>
+                <th>Emprunts</th>
+                <td>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Livre</th>
+                                <th>Emprunté le</th>
+                                <th>Retour prévue le</th>
+                                <th>Rendu le</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+{% endblock %}

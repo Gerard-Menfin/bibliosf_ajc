@@ -1,0 +1,28 @@
+{% extends "base.html.twig" %}
+
+{% block body %}
+    <ol>
+        {% if variable is iterable %}
+            <li>
+                <p>syntaxe de PHP</p>
+                <p>La personne s'appelle {{ variable["prenom"] }} {{ variable["nom"] }}</p>    
+            </li>
+            <li>
+                <p>Foreach</p>
+                {% for indice, valeur in variable %}
+                    <ul>
+                        <li>{{ indice }} : {{ valeur }}</li>
+                    </ul>
+                {% endfor %}
+            </li>
+        {% else %}
+            <li>
+                <p>syntaxe de twig (javascript)</p>
+                <p>La personne s'appelle {{ variable.prenom }} {{ variable.nom }}</p>
+            </li>
+        {% endif %}
+
+
+
+    </ol>
+{% endblock %}

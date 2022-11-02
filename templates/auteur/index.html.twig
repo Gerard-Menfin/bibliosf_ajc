@@ -1,0 +1,36 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Liste des auteurs{% endblock %}
+
+{% block body %}
+    <h1>Liste des auteurs</h1>
+
+    <table class="table table-bordered">
+        <thead class="thead-dark">
+            <tr>
+                <th>ID</th>
+                <th>Nom</th>
+                <th>Biographie</th>
+                <th><i class="fa fa-gear"></i></th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for auteur in auteurs %}
+                <tr>
+                    <td>{{ auteur.id }}</td>
+                    <td>{{ auteur.prenom ~ " " ~ auteur.nom }}</td>
+                    <td>{{ auteur.biographie }}</td>
+                    <td>
+                        <a href="{{ path("app_auteur_modifier", {id: auteur.id}) }}">
+                            <i class="fa fa-edit"></i>
+                        </a>
+                        <a href="{{ path("app_auteur_supprimer", {id: auteur.id}) }}">
+                            <i class="fa fa-trash"></i>
+                        </a>
+                    </td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+{% endblock %}

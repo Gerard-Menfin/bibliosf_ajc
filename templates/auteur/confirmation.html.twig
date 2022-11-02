@@ -1,0 +1,29 @@
+{% extends "base.html.twig" %}
+
+{% block title %}Confirmation de suppression{% endblock %}
+
+{% block body %}
+    <h1>Suppression d'un auteur</h1>
+    <div class="alert alert-info">Voulez-vous supprimer l'auteur suivant ?</div>
+    <ul class="list-group mb-3">
+        <li class="list-group-item">
+            <strong>ID</strong> : {{ auteur.id }}
+        </li>
+        <li class="list-group-item">
+            <strong>Nom</strong> : {{ auteur.nom }}
+        </li>
+        <li class="list-group-item">
+            <strong>Prénom</strong> : {{ auteur.prenom }}
+        </li>
+        <li class="list-group-item">
+            <strong>Biographie</strong> : {{ auteur.biographie }}
+        </li>
+    </ul>
+
+    <form method="post">
+        <div class="d-flex justify-content-between">
+            <button type="submit" class="btn btn-success">Confirmer</button>
+            <a href="{{ path('app_auteur') }}" class="btn btn-danger">Annuler</a>
+        </div>
+    </form>
+{% endblock %}

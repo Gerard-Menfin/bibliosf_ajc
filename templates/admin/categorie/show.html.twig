@@ -1,0 +1,59 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie{% endblock %}
+
+{% block body %}
+    <h1>Catégorie</h1>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ categorie.id }}</td>
+            </tr>
+            <tr>
+                <th>Libellé</th>
+                <td>{{ categorie.libelle }}</td>
+            </tr>
+            <tr>
+                <th>Mots clés</th>
+                <td>{{ categorie.motsCles }}</td>
+            </tr>
+
+            <tr>
+                <th>Livres</th>
+                <td>
+                    <table class="table table-bordered">
+                        <thead class="thead-dark">
+                            <tr>
+                                <th>ID</th>
+                                <th>Titre</th>
+                                <th>Auteur</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {# EXO : Ajouter un lien sur l'identifiant du livre vers la fiche livre #}
+                        {% for livre in categorie.livres %}
+                            <tr>
+                                <td>
+                                    <a href="{{ path('app_admin_livre_show', {id: livre.id}) }}">
+                                        {{ livre.id }}
+                                    </a>    
+                                </td>
+                                <td>{{ livre.titre }}</td>
+                                <td>{{ livre.auteur.identite }}</td>
+                            </tr>
+                        {% endfor %}
+                        </tbody>
+                    </table>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a href="{{ path('app_admin_categorie_index') }}">back to list</a>
+
+    <a href="{{ path('app_admin_categorie_edit', {'id': categorie.id}) }}">edit</a>
+
+    {{ include('admin/categorie/_delete_form.html.twig') }}
+{% endblock %}
